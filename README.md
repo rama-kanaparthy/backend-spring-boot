@@ -32,3 +32,5 @@ A backend application built using **Spring Boot** for [Practice Spring boot]. Th
    git clone https://github.com/rama-backend/backend-spring-boot.git
    cd backend-spring-boot
 
+### H2
+- **http://localhost:8080/h2-console**
