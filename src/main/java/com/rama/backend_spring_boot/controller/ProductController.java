@@ -5,6 +5,7 @@ import com.rama.backend_spring_boot.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -69,5 +70,27 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable @Parameter(description = "The ID of the product to be deleted") Long id) {
         productService.deleteProduct(id);
+    }
+
+    // Endpoint to get paginated and sorted products
+    // GET /products/paged?page=0&size=5&sortBy=name
+    @GetMapping("/paged")
+    public Page<Product> getPagedAndSortedProducts(
+            @RequestParam int page,
+            @RequestParam int size,
+            @RequestParam String sortBy) {
+
+        return productService.getPagedAndSortedProducts(page, size, sortBy);
+    }
+
+    // Endpoint to get paginated products filtered by name
+    //GET /products/search?name=Product&page=0&size=5
+    @GetMapping("/search")
+    public Page<Product> getProductsByName(
+            @RequestParam String name,
+            @RequestParam int page,
+            @RequestParam int size) {
+
+        return productService.getProductsByName(name, page, size);
     }
 }
