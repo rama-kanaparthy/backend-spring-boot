@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.1</version> <!-- Replace with the desired version of Spring Boot -->
+		<version>3.3.5</version> <!-- Replace with the desired version of Spring Boot -->
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -24,31 +24,38 @@
 	</properties>
 
 	<dependencies>
-		<!-- Spring Boot Starter Web for REST APIs (no version needed because it’s managed by the parent POM) -->
+		<!-- Spring Boot Starter Web for REST API and web support -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!-- Spring Boot Starter Data JPA -->
+		<!-- Spring Boot Starter Data JPA for database integration -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
-		<!-- H2 Database (in-memory database) -->
+		<!-- H2 Database for in-memory database (development and testing) -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- Spring Boot Starter Test (for testing) -->
+		<!-- Spring Boot Starter Test for unit testing (optional but recommended) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.15</version> <!-- Latest stable version -->
+		</dependency>
+
 	</dependencies>
 
 	<build>

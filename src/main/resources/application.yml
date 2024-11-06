@@ -2,25 +2,28 @@ server:
   port: 8080
 
 spring:
-  profiles:
-    active: dev
-
-#  datasource:
-#    url: jdbc:mysql://localhost:3306/mydatabase
-#    username: myuser
-#    password: mypassword
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver
     username: sa
     password: password
-    platform: h2
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update  # Automatically create/update schema
+  h2:
+    console:
+      enabled: true  # Enable the H2 Console
 
-    jpa:
-      hibernate:
-        ddl-auto: update
+springdoc:
+  api-docs:
+    enabled: true  # Enable OpenAPI docs generation
+    path: /v3/api-docs  # Path for API documentation JSON file
+  swagger-ui:
+    enabled: true  # Enable Swagger UI
+    path: /swagger-ui.html  # Path to Swagger UI
+    url: /v3/api-docs  # URL where Swagger UI fetches the OpenAPI docs
+    display-operation-id: true  # Show operation IDs in Swagger UI
+    display-request-duration: true  # Display request duration in Swagger UI
+    doc-expansion: list  # Expand API methods on load, list all methods
 
-    h2:
-      console:
-        enabled: true
-        path: /h2-console
