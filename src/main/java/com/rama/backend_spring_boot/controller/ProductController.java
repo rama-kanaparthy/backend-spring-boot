@@ -35,7 +35,7 @@ public class ProductController {
     )
 
     @GetMapping("/{id}")
-    public Optional<Product> getProductById(
+    public Product getProductById(
             @PathVariable
             @Parameter(description = "The ID of the product to retrieve") Long id) {
         return productService.getProductById(id);

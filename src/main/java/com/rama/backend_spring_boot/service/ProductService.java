@@ -1,5 +1,7 @@
 package com.rama.backend_spring_boot.service;
 
+import com.rama.backend_spring_boot.exception.ProductAlreadyExistsException;
+import com.rama.backend_spring_boot.exception.ProductNotFoundException;
 import com.rama.backend_spring_boot.model.Product;
 import com.rama.backend_spring_boot.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +24,14 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Optional<Product> getProductById(Long id) {
-        return productRepository.findById(id);
+    public Product getProductById(Long id) {
+        return productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Product with ID " + id + " not found."));
     }
 
     public Product createProduct(Product product) {
+        if (productRepository.existsById(product.getId())) {
+            throw new ProductAlreadyExistsException("Product with ID " + product.getId() + " already exists.");
+        }
         return productRepository.save(product);
     }
 
@@ -35,10 +40,13 @@ public class ProductService {
             product.setId(id);
             return productRepository.save(product);
         }
-        return null;
+        throw new ProductNotFoundException("Product with ID " + id + " not found.");
     }
 
     public void deleteProduct(Long id) {
+        if (!productRepository.existsById(id)) {
+           throw new ProductNotFoundException("Product with ID " + id + " not found.");
+        }
         productRepository.deleteById(id);
     }
 
@@ -59,5 +67,7 @@ public class ProductService {
         Pageable pageable = PageRequest.of(page, size);
         return productRepository.findByNameContaining(name, pageable);
     }
+
+
 }
 
