@@ -4,11 +4,15 @@ import com.rama.backend_spring_boot.model.Product;
 import com.rama.backend_spring_boot.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,15 +26,24 @@ public class ProductController {
     @Operation(summary = "Get all products", description = "Retrieve a list of all products available in the system.")
     @GetMapping
     public List<Product> getAllProducts() {
+
         return productService.getAllProducts();
+    }
+    
+    @PreAuthorize("")
+    @GetMapping("/list")
+    public ResponseEntity<List<String>> getProductList() {
+        // Sample product list
+        List<String> products = Arrays.asList("Product 1", "Product 2", "Product 3");
+        return ResponseEntity.ok(products);
     }
 
     @Operation(
             summary = "Get product by ID",
             description = "Retrieve a specific product by its ID. If the product doesn't exist, a 404 error is returned.",
             responses = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Successfully retrieved the product"),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Product not found")
+                    @ApiResponse(responseCode = "200", description = "Successfully retrieved the product"),
+                    @ApiResponse(responseCode = "404", description = "Product not found")
             }
     )
 
@@ -51,8 +64,8 @@ public class ProductController {
             summary = "Update product by ID",
             description = "Update the details of an existing product by its ID. If the product doesn't exist, a 404 error is returned.",
             responses = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Successfully updated the product"),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Product not found")
+                    @ApiResponse(responseCode = "200", description = "Successfully updated the product"),
+                    @ApiResponse(responseCode = "404", description = "Product not found")
             }
     )
     @PutMapping("/{id}")

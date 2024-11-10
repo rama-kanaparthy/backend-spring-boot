@@ -1,6 +1,9 @@
 server:
   port: 8080
 
+jwt:
+  secret: mysecretkey123
+
 spring:
   datasource:
     url: jdbc:h2:mem:testdb
