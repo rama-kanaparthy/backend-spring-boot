@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +43,7 @@ public class ProductController {
 
     @Operation(summary = "Create a new product", description = "Create a new product by providing product details in the request body.")
     @PostMapping
-    public Product createProduct(@RequestBody @Parameter(description = "Product object that needs to be added to the inventory") Product product) {
+    public Product createProduct(@Valid @RequestBody @Parameter(description = "Product object that needs to be added to the inventory") Product product) {
         return productService.createProduct(product);
     }
 
