@@ -5,6 +5,7 @@ import com.rama.backend_spring_boot.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -48,6 +50,7 @@ public class ProductController {
     @Operation(summary = "Create a new product", description = "Create a new product by providing product details in the request body.")
     @PostMapping
     public Product createProduct(@Valid @RequestBody @Parameter(description = "Product object that needs to be added to the inventory") Product product) {
+        log.info("Create Product {}",product);
         return productService.createProduct(product);
     }
 
