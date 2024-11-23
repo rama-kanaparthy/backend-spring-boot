@@ -17,7 +17,7 @@ spring:
   h2:
     console:
       enabled: true  # Enable the H2 Console
-
+      path: /h2-console
 springdoc:
   api-docs:
     enabled: true  # Enable OpenAPI docs generation
