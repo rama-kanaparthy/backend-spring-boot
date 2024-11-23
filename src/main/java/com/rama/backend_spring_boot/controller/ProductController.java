@@ -28,14 +28,6 @@ public class ProductController {
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
     }
-    
-    @PreAuthorize("")
-    @GetMapping("/list")
-    public ResponseEntity<List<String>> getProductList() {
-        // Sample product list
-        List<String> products = Arrays.asList("Product 1", "Product 2", "Product 3");
-        return ResponseEntity.ok(products);
-    }
 
     @Operation(
             summary = "Get product by ID",
