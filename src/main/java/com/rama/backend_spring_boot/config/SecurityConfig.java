@@ -18,7 +18,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(12);
     }
 
     public SecurityConfig(JwtRequestFilter jwtRequestFilter) {
@@ -28,9 +28,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-                        .antMatchers("/auth/hello/**", "/auth/register/**", "/auth/login/**", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/h2-console/**").permitAll()
+                        .antMatchers("/auth/hello/**", "/auth/users/**",
+                                "/auth/register/**",
+                                "/auth/login/**", "/swagger-ui/**", "/v3/api-docs/**",
+                                "/swagger-ui.html", "/h2-console/**").permitAll()
                         .anyRequest().authenticated()
                 )
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf().disable();
 

@@ -12,6 +12,9 @@ public class User {
     private String username;
     private String password;
 
+    public User(){
+
+    }
     // Constructors
     public User(String username, String encodedPassword) {
         this.username = username;

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,18 +28,22 @@ public class AuthService {
         if (userRepository.findByUsername(username).isPresent()) {
             throw new IllegalArgumentException("Username already taken");
         }
-        String encodedPassword = passwordEncoder.encode(password);  // Use passwordEncoder to hash the password
-        User user = new User(username, encodedPassword);
+       // String encodedPassword = passwordEncoder.encode(password);  // Use passwordEncoder to hash the password
+        User user = new User(username, password);
         userRepository.save(user);
         return "User registered successfully";
     }
 
     public String login(String username, String password) {
         Optional<User> user = userRepository.findByUsername(username);
-        if (user.isPresent() && passwordEncoder.matches(password, user.get().getPassword())) {
+        if (user.isPresent() && password.contentEquals(user.get().getPassword())) {
             return jwtUtil.generateToken(user.get().getUsername());
         }
         throw new IllegalArgumentException("Invalid username or password");
+    }
+
+    public List<User> getUsers() {
+        return userRepository.findAll();
     }
 
 }
