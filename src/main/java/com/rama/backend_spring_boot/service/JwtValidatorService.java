@@ -14,7 +14,7 @@ public class JwtValidatorService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String AUTH_SERVER_URL = "http://authserver:8084/validate"; // URL of the AuthServer validation endpoint
+    private final String AUTH_SERVER_URL = "http://authserver:8080/validate"; // URL of the AuthServer validation endpoint
 
     public boolean validateJwt(String token) {
         HttpHeaders headers = new HttpHeaders();

@@ -26,7 +26,6 @@ public class ProductController {
     @Operation(summary = "Get all products", description = "Retrieve a list of all products available in the system.")
     @GetMapping
     public List<Product> getAllProducts() {
-
         return productService.getAllProducts();
     }
     

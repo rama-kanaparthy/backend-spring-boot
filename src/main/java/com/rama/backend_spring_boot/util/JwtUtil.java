@@ -14,6 +14,7 @@ public class JwtUtil {
 
     @Value("${jwt.secret}")
     private String secret;
+    private final long EXPIRATION_TIME = 1000 * 60 * 60 * 10; // 10 hours in milliseconds
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -31,6 +32,15 @@ public class JwtUtil {
 
     public Boolean isTokenExpired(String token) {
         return extractClaim(token, Claims::getExpiration).before(new Date());
+    }
+
+    public String generateToken(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .signWith(SignatureAlgorithm.HS256, secret)
+                .compact();
     }
 }
 
