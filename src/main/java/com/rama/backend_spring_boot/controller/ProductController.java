@@ -1,6 +1,7 @@
 package com.rama.backend_spring_boot.controller;
 
 import com.rama.backend_spring_boot.model.Product;
+import com.rama.backend_spring_boot.model.dtos.ProductDTO;
 import com.rama.backend_spring_boot.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -49,9 +50,9 @@ public class ProductController {
 
     @Operation(summary = "Create a new product", description = "Create a new product by providing product details in the request body.")
     @PostMapping
-    public Product createProduct(@Valid @RequestBody @Parameter(description = "Product object that needs to be added to the inventory") Product product) {
-        log.info("Create Product {}",product);
-        return productService.createProduct(product);
+    public Product createProduct(@Valid @RequestBody @Parameter(description = "Product object that needs to be added to the inventory") ProductDTO productDTO) {
+        log.info("Create Product {}",productDTO);
+        return productService.createProduct(productDTO);
     }
 
     @Operation(

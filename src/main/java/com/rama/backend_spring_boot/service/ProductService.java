@@ -3,6 +3,7 @@ package com.rama.backend_spring_boot.service;
 import com.rama.backend_spring_boot.exception.ProductAlreadyExistsException;
 import com.rama.backend_spring_boot.exception.ProductNotFoundException;
 import com.rama.backend_spring_boot.model.Product;
+import com.rama.backend_spring_boot.model.dtos.ProductDTO;
 import com.rama.backend_spring_boot.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,9 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -29,11 +28,17 @@ public class ProductService {
         return productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Product with ID " + id + " not found."));
     }
 
-    public Product createProduct(Product product) {
+    public Product createProduct(ProductDTO product) {
         if (productRepository.existsById(product.getId())) {
             throw new ProductAlreadyExistsException("Product with ID " + product.getId() + " already exists.");
         }
-        return productRepository.save(product);
+
+        Product newProduct = new Product();
+        newProduct.setId(product.getId());
+        newProduct.setName(product.getName());
+        newProduct.setPrice(product.getPrice());
+
+        return productRepository.save(newProduct);
     }
 
     public Product updateProduct(Long id, Product product) {

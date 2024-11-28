@@ -1,7 +1,7 @@
 package com.rama.backend_spring_boot.controller;
 
 import com.rama.backend_spring_boot.model.User;
-import com.rama.backend_spring_boot.model.UserDTO;
+import com.rama.backend_spring_boot.model.dtos.UserDTO;
 import com.rama.backend_spring_boot.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

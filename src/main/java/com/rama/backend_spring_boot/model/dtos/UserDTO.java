@@ -1,4 +1,4 @@
-package com.rama.backend_spring_boot.model;
+package com.rama.backend_spring_boot.model.dtos;
 
 
 import lombok.Data;
