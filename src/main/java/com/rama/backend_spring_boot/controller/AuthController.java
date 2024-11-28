@@ -1,11 +1,13 @@
 package com.rama.backend_spring_boot.controller;
 
 import com.rama.backend_spring_boot.model.User;
+import com.rama.backend_spring_boot.model.UserDTO;
 import com.rama.backend_spring_boot.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,8 +32,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
-        String loggedIn = authService.login(user.getUsername(), user.getPassword());
+    public ResponseEntity<String> login(@Valid @RequestBody UserDTO userDTO) {
+        String loggedIn = authService.login(userDTO.getUsername(), userDTO.getPassword());
         if (loggedIn != null) {
             return ResponseEntity.ok(loggedIn);
         } else {
