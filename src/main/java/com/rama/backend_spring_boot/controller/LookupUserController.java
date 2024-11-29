@@ -7,11 +7,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -48,4 +47,57 @@ public class LookupUserController {
 
         return ResponseEntity.ok("ok ");
     }
+
+    @GetMapping("/square")
+    public CompletableFuture<ResponseEntity<Integer>> getSquare(@RequestParam Integer number) throws InterruptedException, ExecutionException {
+        CompletableFuture<Integer> squareFuture = lookupService.calculateSquare(number);
+
+        return squareFuture.thenApply(result -> {
+            // Log the result
+            log.info("Square is: " + result);
+            return ResponseEntity.ok(result); // Return HTTP 200 with the result
+        });
+
+    }
+
+    @GetMapping("/combine")
+    public CompletableFuture<ResponseEntity<Integer>> combineOperations(
+            @RequestParam int num1,
+            @RequestParam int num2,
+            @RequestParam int num3,
+            @RequestParam int num4) {
+
+        CompletableFuture<Integer> addition = lookupService.add(num1, num2);
+        CompletableFuture<Integer> multiplication = lookupService.multiply(num3, num4);
+
+        CompletableFuture<Integer> combinedResult = addition.thenCombine(multiplication, (sum, product) -> {
+            int total = sum + product;
+            log.info("Combined Result: " + total);
+            return total;
+        });
+
+        return combinedResult.thenApply(ResponseEntity::ok);
+    }
+
+    @GetMapping("/fetchAll")
+    public CompletableFuture<ResponseEntity<Map<String, String>>> fetchAllData() {
+        CompletableFuture<String> userFuture = lookupService.fetchUserData();
+        CompletableFuture<String> productFuture = lookupService.fetchProductData();
+        CompletableFuture<String> orderFuture = lookupService.fetchOrderData();
+
+        CompletableFuture<Void> allFutures = CompletableFuture.allOf(userFuture, productFuture, orderFuture);
+
+        return allFutures.thenApply(voidResult -> {
+            Map<String, String> response = new HashMap<>();
+            try {
+                response.put("User", userFuture.get());
+                response.put("Product", productFuture.get());
+                response.put("Order", orderFuture.get());
+            } catch (Exception e) {
+                throw new RuntimeException("Error fetching data", e);
+            }
+            return ResponseEntity.ok(response);
+        });
+    }
+
 }

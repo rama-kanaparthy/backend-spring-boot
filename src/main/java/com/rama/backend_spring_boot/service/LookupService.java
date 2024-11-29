@@ -46,4 +46,52 @@ public class LookupService {
         });
     }
 
+    @Async
+    public CompletableFuture<Integer> calculateSquare(int number) {
+        return CompletableFuture.supplyAsync(() -> {
+            log.info("Calculating square for: " + number);
+            return number * number;
+        });
+    }
+
+    @Async
+    public CompletableFuture<Integer> add(int a, int b) {
+        return CompletableFuture.supplyAsync(() -> {
+            log.info("Adding " + a + " and " + b);
+            return a + b;
+        });
+    }
+
+    @Async
+    public CompletableFuture<Integer> multiply(int a, int b) {
+        return CompletableFuture.supplyAsync(() -> {
+            log.info("Multiplying " + a + " and " + b);
+            return a * b;
+        });
+    }
+
+    @Async
+    public CompletableFuture<String> fetchUserData() {
+        return CompletableFuture.supplyAsync(() -> {
+            log.info("Fetching User Data...");
+            return "User Data";
+        });
+    }
+
+    @Async
+    public CompletableFuture<String> fetchProductData() {
+        return CompletableFuture.supplyAsync(() -> {
+            log.info("Fetching Product Data...");
+            return "Product Data";
+        });
+    }
+
+    @Async
+    public CompletableFuture<String> fetchOrderData() {
+        return CompletableFuture.supplyAsync(() -> {
+            log.info("Fetching Order Data...");
+            return "Order Data";
+        });
+    }
+
 }
