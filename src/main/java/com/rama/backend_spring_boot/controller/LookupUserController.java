@@ -35,14 +35,16 @@ public class LookupUserController {
         CompletableFuture<LookupUser> info4 = lookupService.findUser("spring-boot");
         CompletableFuture<LookupUser> info5 = lookupService.findUser("spring-security");
         CompletableFuture<LookupUser> info6 = lookupService.findUser("spring-mvc");
-
-        CompletableFuture.allOf(info1, info2, info3, info4,info5,info6).join();
+        CompletableFuture<String> info7 = lookupService.fetchData();
+        lookupService.performTask();
+        CompletableFuture.allOf(info1, info2, info3, info4,info5,info6,info7).join();
         log.info("------------>" + info1.get());
         log.info("------------>" + info2.get());
         log.info("------------>" + info3.get());
         log.info("------------>" + info4.get());
         log.info("------------>" + info5.get());
         log.info("------------>" + info6.get());
+        log.info("------------>" + info7.get());
 
         return ResponseEntity.ok("ok ");
     }
