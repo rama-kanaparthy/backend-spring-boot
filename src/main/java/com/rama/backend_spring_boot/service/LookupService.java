@@ -1,41 +1,46 @@
 package com.rama.backend_spring_boot.service;
 
 import com.rama.backend_spring_boot.model.LookupUser;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.concurrent.CompletableFuture;
 
-@Data
 @Slf4j
 @RequiredArgsConstructor
 @Service
 public class LookupService {
     private static final String GITHUB_USERS_URL = "https://api.github.com/users/%s";
-    private final RestTemplate restTemplate;
+    private final WebClient webClient; // Replace RestTemplate with WebClient
 
     @Async("customExecutor")
-    public CompletableFuture<LookupUser> findUser(String user) throws InterruptedException {
-        log.info("Looking up  " + user);
+    public CompletableFuture<LookupUser> findUser(String user) {
+        log.info("Looking up user: " + user);
         String url = String.format(GITHUB_USERS_URL, user);
-        LookupUser result = restTemplate.getForObject(url, LookupUser.class);
-       // Thread.sleep(4000L);
-        return CompletableFuture.completedFuture(result);
+
+        // Asynchronously fetch data using WebClient
+        Mono<LookupUser> userMono = webClient
+                .get()
+                .uri(url)
+                .retrieve()
+                .bodyToMono(LookupUser.class)
+                .doOnError(e -> log.error("Error fetching user: " + user, e));
+
+        return userMono.toFuture(); // Convert Mono to CompletableFuture
     }
 
     @Async("customExecutor")
     public void performTask() {
-        // Long-running logic here
         log.info("Executing task in thread: " + Thread.currentThread().getName());
+        // Long-running logic here
     }
 
     @Async("customExecutor")
     public CompletableFuture<String> fetchData() {
-        // Simulate a long-running task
         return CompletableFuture.supplyAsync(() -> {
             try {
                 Thread.sleep(2000); // Simulating delay
@@ -93,5 +98,4 @@ public class LookupService {
             return "Order Data";
         });
     }
-
 }
