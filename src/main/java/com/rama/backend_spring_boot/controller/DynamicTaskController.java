@@ -1,17 +1,15 @@
 package com.rama.backend_spring_boot.controller;
 
 import com.rama.backend_spring_boot.service.DynamicSchedulerService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/dynamic-task")
 public class DynamicTaskController {
 
     private final DynamicSchedulerService schedulerService;
-
-    public DynamicTaskController(DynamicSchedulerService schedulerService) {
-        this.schedulerService = schedulerService;
-    }
 
     @PostMapping("/start/{taskId}")
     public String startTask(@PathVariable String taskId, @RequestParam long intervalMillis) {

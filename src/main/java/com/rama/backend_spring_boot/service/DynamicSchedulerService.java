@@ -1,5 +1,6 @@
 package com.rama.backend_spring_boot.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Service;
@@ -8,19 +9,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledFuture;
 
+@RequiredArgsConstructor
 @Service
 public class DynamicSchedulerService {
 
     private final TaskScheduler taskScheduler;
     private final Map<String, ScheduledFuture<?>> tasks = new ConcurrentHashMap<>();
-
-    public DynamicSchedulerService() {
-        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
-        scheduler.setPoolSize(10);
-        scheduler.setThreadNamePrefix("DynamicTask-");
-        scheduler.initialize();
-        this.taskScheduler = scheduler;
-    }
 
     // Schedule a dynamic task
     public void scheduleTask(String taskId, Runnable task, long intervalMillis) {

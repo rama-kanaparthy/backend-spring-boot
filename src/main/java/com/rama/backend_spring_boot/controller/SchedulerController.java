@@ -1,24 +1,20 @@
 package com.rama.backend_spring_boot.controller;
 
 import com.rama.backend_spring_boot.component.ScheduledTaskManager;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
 @Slf4j
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/scheduler")
 public class SchedulerController {
 
     private final ScheduledTaskManager taskManager;
-
-    @Autowired
-    public SchedulerController(ScheduledTaskManager taskManager) {
-        this.taskManager = taskManager;
-    }
 
     @PostMapping("/start")
     public ResponseEntity<String> startTask(@RequestParam long intervalMillis) {

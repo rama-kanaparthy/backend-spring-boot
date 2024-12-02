@@ -1,24 +1,20 @@
 package com.rama.backend_spring_boot.component;
 
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ScheduledFuture;
 
 @Slf4j
+@RequiredArgsConstructor
 @Component
 public class ScheduledTaskManager {
 
     private ScheduledFuture<?> scheduledFuture;
     private final TaskScheduler taskScheduler;
-
-    @Autowired
-    public ScheduledTaskManager(TaskScheduler taskScheduler) {
-        this.taskScheduler = taskScheduler;
-    }
 
     public void start(Runnable task, long intervalMillis) {
         if (scheduledFuture == null || scheduledFuture.isCancelled()) {
