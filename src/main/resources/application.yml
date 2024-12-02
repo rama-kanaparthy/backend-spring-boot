@@ -4,7 +4,14 @@ server:
 jwt:
   secret: "myverysecuresecretkeythatis256bitlong!!"
 
+file:
+  upload-dir: uploads # Directory to store uploaded files
+
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB # Maximum size of a single uploaded file
+      max-request-size: 10MB # Maximum total size of the request
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver
