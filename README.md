@@ -40,3 +40,7 @@ A backend application built using **Spring Boot** for [Practice Spring boot]. Th
 
 ### H2
 - **http://localhost:8080/h2-console**
+
+### Run RabbitMQ with Docker
+- **docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management**
+   
