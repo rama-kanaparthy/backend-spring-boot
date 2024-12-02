@@ -3,7 +3,6 @@
 ## Overview
 A backend application built using **Spring Boot** for [Practice Spring boot]. The application provides a RESTful API to manage and serve resources for the frontend or external clients.
 
-
 ## Dependencies
 - Spring Web
 - Spring Data JPA
