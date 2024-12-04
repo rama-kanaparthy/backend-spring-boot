@@ -7,6 +7,13 @@ A backend application built using **Spring Boot** for [Practice Spring boot]. Th
 - Spring Web
 - Spring Data JPA
 - H2 Database (for an in-memory database)
+- Spring Security
+- Json Web Token
+- Liquibase
+- Lombok
+- RabbitMQ
+- Spring Cache
+- WebFlux
 
 ## Features
 - User Authentication (JWT-based)
