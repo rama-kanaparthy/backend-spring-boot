@@ -43,3 +43,5 @@ A backend application built using **Spring Boot** for [Practice Spring boot]. Th
 ### Run RabbitMQ with Docker
 - **docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management**
    
+### Cache
+- **Spring boot starter cache**
