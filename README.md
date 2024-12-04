@@ -9,18 +9,17 @@ A backend application built using **Spring Boot** for [Practice Spring boot]. Th
 - H2 Database (for an in-memory database)
 
 ## Features
-- [Feature 1: e.g., User Authentication (JWT-based)]
-- [Feature 2: e.g., CRUD Operations for Products]
-- [Feature 3: e.g., Search functionality]
-- [Feature 4: e.g., Integration with third-party APIs]
-- [Feature 5: e.g., Admin dashboard and user roles]
+- [User Authentication (JWT-based)]
+- [CRUD Operations for Products]
+- [Search functionality]
+- [Integration with third-party APIs]
 
 ## Technologies Planning to Use
 - **Java** - Main programming language
 - **Spring Boot** - Application framework
 - **Spring Data JPA** - For database interactions
 - **Spring Security** - For authentication and authorization
-- **MySQL/PostgreSQL/MongoDB** - Database
+- **H2/MySQL/PostgreSQL/MongoDB** - Database
 - **Swagger** - API documentation
 - **JUnit & Mockito** - Testing framework
 
