@@ -9,10 +9,10 @@ A backend application built using **Spring Boot** for [Practice Spring boot]. Th
 - H2 Database (for an in-memory database)
 
 ## Features
-- [User Authentication (JWT-based)]
-- [CRUD Operations for Products]
-- [Search functionality]
-- [Integration with third-party APIs]
+- User Authentication (JWT-based)
+- CRUD Operations for Products
+- Search functionality
+- Integration with third-party APIs
 
 ## Technologies Planning to Use
 - **Java** - Main programming language
