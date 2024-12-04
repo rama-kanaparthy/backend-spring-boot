@@ -30,6 +30,8 @@ spring:
     port: 5672
     username: guest
     password: guest
+  cache:
+    type: simple # Use simple in-memory caching
 springdoc:
   api-docs:
     enabled: true  # Enable OpenAPI docs generation
@@ -41,4 +43,17 @@ springdoc:
     display-operation-id: true  # Show operation IDs in Swagger UI
     display-request-duration: true  # Display request duration in Swagger UI
     doc-expansion: list  # Expand API methods on load, list all methods
+
+logging:
+  level:
+    org.springframework.cache: DEBUG
+
+management:
+  metrics:
+    enable:
+      cache: true  # Enable cache metrics
+  endpoints:
+    web:
+      exposure:
+        include: "metrics"  # Expose the metrics endpoint
 
