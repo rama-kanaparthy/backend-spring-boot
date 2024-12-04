@@ -2,36 +2,37 @@ server:
   port: 8080
 
 jwt:
-  secret: "myverysecuresecretkeythatis256bitlong!!"
+  secret: "myverysecuresecretkeythatis256bitlong!!"  # JWT Secret for token signing
 
 file:
-  upload-dir: uploads # Directory to store uploaded files
+  upload-dir: uploads  # Directory to store uploaded files
 
 spring:
   servlet:
     multipart:
-      max-file-size: 10MB # Maximum size of a single uploaded file
-      max-request-size: 10MB # Maximum total size of the request
+      max-file-size: 10MB  # Maximum size of a single uploaded file
+      max-request-size: 10MB  # Maximum total size of the request
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:testdb  # In-memory H2 database for testing
     driverClassName: org.h2.Driver
     username: sa
     password: password
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.H2Dialect  # Hibernate dialect for H2 database
     hibernate:
-      ddl-auto: update  # Automatically create/update schema
+      ddl-auto: update  # Automatically create/update schema in the database
   h2:
     console:
-      enabled: true  # Enable the H2 Console
-      path: /h2-console
+      enabled: true  # Enable H2 Console for easy database inspection
+      path: /h2-console  # Path to access the H2 console in browser
   rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+    host: localhost  # RabbitMQ host
+    port: 5672  # RabbitMQ port
+    username: guest  # RabbitMQ default username
+    password: guest  # RabbitMQ default password
   cache:
-    type: simple # Use simple in-memory caching
+    type: simple  # Use simple in-memory caching
+
 springdoc:
   api-docs:
     enabled: true  # Enable OpenAPI docs generation
@@ -46,14 +47,16 @@ springdoc:
 
 logging:
   level:
-    org.springframework.cache: DEBUG
+    org.springframework.cache: DEBUG  # Log cache-related activities for debugging
 
 management:
   metrics:
     enable:
-      cache: true  # Enable cache metrics
+      cache.gets: true  # Enable metrics for cache 'gets'
+      cache.puts: true  # Enable metrics for cache 'puts'
+      cache.evictions: true  # Enable metrics for cache 'evictions'
   endpoints:
     web:
       exposure:
-        include: "metrics"  # Expose the metrics endpoint
+        include: "metrics"  # Expose the metrics endpoint for cache-related metrics
 
