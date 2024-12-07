@@ -51,3 +51,6 @@ A backend application built using **Spring Boot** for [Practice Spring boot]. Th
    
 ### Cache
 - **Spring boot starter cache**
+
+### GraphQL
+- **Install graphql plugin**
