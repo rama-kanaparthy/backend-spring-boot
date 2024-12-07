@@ -1,0 +1,27 @@
+type Query {
+    getPayment(paymentId: ID!): Payment
+    getAllPayments: [Payment]
+}
+
+type Mutation {
+    processPayment(input: PaymentInput!): PaymentResponse
+}
+
+type Payment {
+    paymentId: ID
+    amount: Float
+    currency: String
+    status: String
+}
+
+input PaymentInput {
+    amount: Float
+    currency: String
+    description: String
+}
+
+type PaymentResponse {
+    success: Boolean
+    message: String
+    payment: Payment
+}
