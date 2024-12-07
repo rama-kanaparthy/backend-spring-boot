@@ -28,7 +28,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-                        .antMatchers("/actuator/metrics/**","/rabbitmq/**","/files/**","/dynamic-task/**","/api/scheduler/**", "/lookup/**", "/auth/hello/**", "/auth/users/**",
+                        .antMatchers("/graphiql/**", "/vendor/**","/actuator/metrics/**","/rabbitmq/**","/files/**","/dynamic-task/**","/api/scheduler/**", "/lookup/**", "/auth/hello/**", "/auth/users/**",
                                 "/auth/register/**",
                                 "/auth/login/**", "/swagger-ui/**", "/v3/api-docs/**",
                                 "/swagger-ui.html", "/h2-console/**").permitAll()

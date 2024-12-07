@@ -37,6 +37,15 @@ spring:
     enabled: true
     change-log: classpath:/db/changelog/db.changelog.yaml
 
+  web:
+    resources:
+      add-mappings: true
+    graphql:
+      graphiql:
+        enabled: true
+        mapping: /graphiql
+        endpoint: /graphql
+
 springdoc:
   api-docs:
     enabled: true  # Enable OpenAPI docs generation
