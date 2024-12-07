@@ -54,3 +54,47 @@ A backend application built using **Spring Boot** for [Practice Spring boot]. Th
 
 ### GraphQL
 - **Install graphql plugin**
+### Get a Single Payment
+
+To fetch a specific payment by `paymentId`, use the following query:
+
+```graphql
+query {
+  getPayment(paymentId: "1") {
+    paymentId
+    amount
+    currency
+    status
+  }
+}
+### Get All Payments
+
+To fetch a list of all payments, use the following query:
+
+```graphql
+query {
+  getAllPayments {
+    paymentId
+    amount
+    currency
+    status
+  }
+}
+
+### Process Payment
+
+To create a new payment, use the following mutation:
+
+```graphql
+mutation {
+  processPayment(input: { amount: 100.0, currency: "USD", description: "Payment for order #123" }) {
+    success
+    message
+    payment {
+      paymentId
+      amount
+      currency
+      status
+    }
+  }
+}
