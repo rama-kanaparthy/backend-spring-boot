@@ -33,6 +33,10 @@ spring:
   cache:
     type: simple  # Use simple in-memory caching
 
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog.yaml
+
 springdoc:
   api-docs:
     enabled: true  # Enable OpenAPI docs generation
