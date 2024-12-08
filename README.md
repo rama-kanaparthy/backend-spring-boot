@@ -57,8 +57,8 @@ A backend application built using **Spring Boot** for [Practice Spring boot]. Th
 ### Get a Single Payment
 
 To fetch a specific payment by `paymentId`, use the following query:
-
-```graphql
+```
+#graphql
 query {
   getPayment(paymentId: "1") {
     paymentId
@@ -71,7 +71,7 @@ query {
 
 To fetch a list of all payments, use the following query:
 
-```graphql
+graphql
 query {
   getAllPayments {
     paymentId
@@ -85,7 +85,7 @@ query {
 
 To create a new payment, use the following mutation:
 
-```graphql
+graphql
 mutation {
   processPayment(input: { amount: 100.0, currency: "USD", description: "Payment for order #123" }) {
     success
@@ -98,3 +98,13 @@ mutation {
     }
   }
 }
+```
+
+## Run this command from the directory containing the Dockerfile:
+```
+docker build -t spring-boot-app .
+This command will create a Docker image named spring-boot-app.
+
+Start a container using the image:
+docker run -p 8080:8080 spring-boot-app
+```
