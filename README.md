@@ -1,7 +1,7 @@
-# Backend SpringBoot Demo Application
-
+Backend SpringBoot Demo Application
+===================================
 ## Overview
-A backend application built using **Spring Boot** for [Practice Spring boot]. The application provides a RESTful API to manage and serve resources for the frontend or external clients.
+>A backend application built using **Spring Boot** for [Practice Spring boot]. The application provides a RESTful API to manage and serve resources for the frontend or external clients.
 
 ## Dependencies
 - Spring Web
@@ -44,16 +44,16 @@ A backend application built using **Spring Boot** for [Practice Spring boot]. Th
    cd backend-spring-boot
 
 ### H2
-- **http://localhost:8080/h2-console**
+>- **http://localhost:8080/h2-console**
 
 ### Run RabbitMQ with Docker
-- **docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management**
+>- **docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management**
    
 ### Cache
-- **Spring boot starter cache**
+>- **Spring boot starter cache**
 
 ### GraphQL
-- **Install graphql plugin**
+>- **Install graphql plugin**
 ### Get a Single Payment
 
 To fetch a specific payment by `paymentId`, use the following query:
