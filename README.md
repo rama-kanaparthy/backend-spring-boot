@@ -101,6 +101,7 @@ mutation {
 ```
 
 ## Run this command from the directory containing the Dockerfile:
+
 ```
 docker build -t spring-boot-app .
 This command will create a Docker image named spring-boot-app.
